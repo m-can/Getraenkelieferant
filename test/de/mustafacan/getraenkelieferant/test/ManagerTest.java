@@ -1,4 +1,6 @@
+package de.mustafacan.getraenkelieferant.test;
 import static org.junit.Assert.*;
+import de.mustafacan.getraenkelieferant.src.*;
 
 import org.junit.Test;
 

@@ -1,6 +1,8 @@
+package de.mustafacan.getraenkelieferant.test;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+import de.mustafacan.getraenkelieferant.src.*;
 
 public class AngestellterTest {
 

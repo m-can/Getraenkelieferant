@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Getraenkelieferant" default="dist" basedir=".">
+  <description>
+    the simulation of a beverage supplier
+  </description>
+  <property name="src" location="src"/>
+  <property name="build" location="build"/>
+  <property name="dist" location="dist"/>
+  <property name="doc" location="doc"/>
+  <property name="report" location="report"/>
+
+  <target name="init">
+    <mkdir dir="${build}"/>
+  </target>
+
+  <target name="compile" depends="init"
+        description="compile the source">
+    <javac srcdir="${src}" destdir="${build}"/>
+  </target>
+
+  <target name="dist" depends="compile"
+        description="generate the distribution folder">
+    <mkdir dir="${dist}/lib"/>
+    <jar jarfile="${dist}/lib/Getraenkelieferant.jar" basedir="${build}"/>
+  </target>
+
+  <target name="clean"
+        description="clean up">
+    <delete dir="${build}"/>
+    <delete dir="${dist}"/>
+    <delete dir="${doc}"/>
+    <delete dir="${report}"/>
+  </target>
+
+  <target name="jar">
+    <mkdir dir="build/jar"/>
+    <jar destfile="build/jar/Getraenkelieferant.jar" basedir="build/classes">
+      <manifest>
+        <attribute name="Main" value="Getraenkelieferant"/>
+      </manifest>
+    </jar>
+  </target>
+
+  <target name="run">
+    <java jar="build/jar/Getraenkelieferant.jar" fork="true"/>
+  </target>
+
+  <target name="junit" depends="compile">
+    <junit printsummary="yes" haltonfailure="no">
+	  <classpath refid="test.path" />	
+	  <classpath location="${test.classes.dir}" />
+	  <mkdir dir="${report}"/>
+	  <test name="com.mustafacan.getraenkelieferant.test" 
+		  haltonfailure="no" todir="${report}">
+		<formatter type="plain" />
+		<formatter type="xml" />
+	  </test>	
+    </junit>
+  </target>
+  
+  <target name="doc" depends="init" description="generate documentation">
+  	<mkdir dir="${doc}"/>
+    <javadoc sourcepath="${src}" destdir="${doc}"/>
+  </target>
+</project>
